@@ -208,11 +208,13 @@ module.exports = {
 
 ## 3）如何做 code split
 
-- DllPlugin 和 DllReferencePlugin
-  DllPlugin 和 DllReferencePlugin 提供了以大幅度提高构建时间性能的方式拆分软件包的方法。它将特定的第三方 NPM 包模块提前构建，然后通过页面引入，使得 vendor 文件可以大幅度减小，同时也极大的提高了构件速度。[参考 webpack 官网介绍](https://webpack.docschina.org/plugins/dll-plugin/#src/components/Sidebar/Sidebar.jsx)
+- DllPlugin 和 DllReferencePlugin `比较麻烦`
+
+  DllPlugin 和 DllReferencePlugin 提供了以大幅度提高构建时间性能的方式拆分软件包的方法。它将特定的第三方 NPM 包模块提前构建，然后通过页面引入，使得 vendor 文件可以大幅度减小，同时也极大的提高了构件速度。[使用介绍](https://juejin.im/post/5d8aac8fe51d4578477a6699)
+
+- AutoDllPlugin
 
 ```javascript
-// https://juejin.im/post/5d8aac8fe51d4578477a6699
 const path = require('path');
 const AutoDllPlugin = require('autodll-webpack-plugin'); // 第 1 步：引入 DLL 自动链接库插件
 
@@ -311,19 +313,22 @@ module.exports = {
 };
 ```
 
-我目前 content-create 项目的配置，这个怎么拆的依据项目[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)的情况来
+content-create 项目的配置，这个怎么拆的依据项目[webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)的情况来
 
 ```javascript
 splitChunks: {
+  // maxSize: 300 * 1024,
   chunks: "all",
+  // maxInitialRequests: 4,
   cacheGroups: {
     extractVendor: {
-      test: /[\\/]node_modules[\\/]element-ui|content-rich-editor[\\/]/,
+      test: /[\\/]node_modules[\\/]HAS_USE_DLL[\\/]/,
       name(module) {
-          const packageName = module.context.match(
+        const match = module.context.match(
           /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-          )[1]
-          return `vendor-${packageName.replace("@", "")}`
+        )
+        const packageName = (match && match[1]) || "no-match"
+        return `vendor-${packageName.replace("@", "")}`
       },
       priority: -9,
       enforce: true // 强制绕开maxInitialRequests
@@ -332,7 +337,6 @@ splitChunks: {
       test: /[\\/]node_modules[\\/]/,
       name: "vendor-common",
       priority: -10,
-      reuseExistingChunk: true,
       enforce: true
     }
   }
