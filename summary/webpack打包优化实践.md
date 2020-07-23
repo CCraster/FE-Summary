@@ -126,7 +126,7 @@ module.export = {
 
 ## 2）减少包的体积
 
-- 生产环境，压缩混淆并移除 console
+- 生产环境，压缩混淆并移除 console.log
 
 > webpack4 中的配置
 
