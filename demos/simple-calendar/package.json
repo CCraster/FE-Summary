@@ -1,0 +1,31 @@
+{
+  "name": "simple-calendar",
+  "version": "0.0.1",
+  "description": "a simple js calendar",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd config && webpack-dev-server",
+    "build": "webpack --config config/webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CCraster/simple-calendar.git"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "author": "Craster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CCraster/simple-calendar/issues"
+  },
+  "homepage": "https://github.com/CCraster/simple-calendar#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^4.3.0",
+    "prettier": "^2.0.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
