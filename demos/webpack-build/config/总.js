@@ -92,7 +92,7 @@ const webpackConfig = {
     //     },
     //   }),
     // ],
-    /**************** splitChunks **************** /
+    /**************** splitChunks ****************/
     // splitChunks: {
     //   // maxSize: 300 * 1024,
     //   chunks: 'all',
