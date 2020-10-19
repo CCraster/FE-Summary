@@ -1,8 +1,12 @@
-if (process.env.NODE_ENV === 'production') {
-  config.optimization.minimizer[0].options.terserOptions.compress.warnings = false;
-  config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true;
-  config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true;
-  config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [
-    'console.log',
-  ];
+let a = [1, 2, 3, 4, 5];
+let iter = a[Symbol.iterator]();
+for (let i of iter) {
+  if (i > 2) {
+    break;
+  }
+  console.log(i);
+}
+
+for (let i of iter) {
+  console.log(i);
 }
