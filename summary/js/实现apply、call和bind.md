@@ -34,6 +34,7 @@ Function.prototype.mybind = function (context, ...args) {
   let _args = args,
     fn = this,
     that = context;
+  let fNOP = function () {}; // 利用空函数做个中转，避免修改newFn.prototype 的时候，也会直接修改绑定函数的 prototype
   let newFn = function (...args) {
     let _ctx, result;
     if (this instanceof newFn) {
@@ -46,7 +47,8 @@ Function.prototype.mybind = function (context, ...args) {
     delete _ctx.fn;
     return result;
   };
-  newFn.prototype = fn.prototype;
+  fNOP.prototype = fn.prototype;
+  newFn.prototype = new fNOP();
 
   return newFn;
 };
