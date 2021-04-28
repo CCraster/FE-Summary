@@ -1,3 +1,6 @@
 
 **/node_modules
 **/dist*
+**/vue-router-next-master
+
+**/package-lock.json
