@@ -1,18 +1,19 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
-// import Home from '@/pages/Home.vue';
-// import Page1 from '@/pages/Page1.vue';
-// import Page2 from '@/pages/Page2.vue';
+import Home from '@/pages/Home.vue';
+import Page1 from '@/pages/Page1.vue';
+import Page2 from '@/pages/Page2.vue';
 
 // const Home = () => import('@/pages/Home.vue');
 // const Page1 = () => import('@/pages/Page1.vue');
 // const Page2 = () => import('@/pages/Page2.vue');
 
-const Home = import('@/pages/Home.vue');
-const Page1 = require.ensure([], (require) => {
-  return require('@/pages/Page1.vue').default;
-});
-const Page2 = () => import('@/pages/Page2.vue');
+// /vue-router-next-master/src/navigationGuards.ts
+// const Home = import('@/pages/Home.vue');
+// const Page1 = require.ensure([], (require) => {
+//   return require('@/pages/Page1.vue');
+// });
+// const Page2 = () => import('@/pages/Page2.vue');
 
 const routes = [
   {

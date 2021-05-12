@@ -6,7 +6,7 @@ module.exports = {
   mode: 'none',
   entry: './index.js',
   output: {
-    filename: 'main.js',
+    // filename: 'main.js',
     // chunkFilename: '[id].chunk.js',
     path: path.resolve(__dirname, './dist-non'),
   },
@@ -26,7 +26,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9999,
+    port: 9992,
     hot: true,
   },
 };
