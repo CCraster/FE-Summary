@@ -55,3 +55,12 @@ buttons[3].addEventListener(
   },
   false
 );
+
+// 5）ES6 import()函数
+buttons[4].addEventListener(
+  'click',
+  () => {
+    import('./src/5.import.js');
+  },
+  false
+);

@@ -4,7 +4,7 @@ import './index.css';
   const body = document.getElementsByTagName('body')[0];
   body.innerHTML = `
 <div id="main">
-  initial page
+  This is initial page
 </div>
 <div id="footer">
   <span>to page1</span>
@@ -33,32 +33,32 @@ import './index.css';
 /**
  * import()
  */
-// function toPage1() {
-//   import('./src/pages/page-1').then(({ render }) => {
-//     render();
-//   });
-// }
-// function toPage2() {
-//   import('./src/pages/page-2').then(({ render }) => {
-//     render();
-//   });
-// }
-
-/**
- * require.ensure
- */
 function toPage1() {
-  require.ensure(['./src/pages/a.js'], (require) => {
-    const { render } = require('./src/pages/page-1');
+  import('./src/pages/page-1').then(({ render }) => {
     render();
   });
 }
 function toPage2() {
-  require.ensure([], (require) => {
-    const { render } = require('./src/pages/page-2');
+  import('./src/pages/page-2').then(({ render }) => {
     render();
   });
 }
+
+/**
+ * require.ensure
+ */
+// function toPage1() {
+//   require.ensure(['./src/pages/a.js'], (require) => {
+//     const { render } = require('./src/pages/page-1');
+//     render();
+//   });
+// }
+// function toPage2() {
+//   require.ensure([], (require) => {
+//     const { render } = require('./src/pages/page-2');
+//     render();
+//   });
+// }
 
 /**
  * 触发了code split但是初始化就执行了

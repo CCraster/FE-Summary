@@ -20,7 +20,7 @@
 
 ## 自己动手实现动态加载
 
-常见的有以下四种动态加载 js 的方式：
+常见的有以下几种动态加载 js 的方式：
 
 ### 1. document.write
 
@@ -36,7 +36,6 @@ document.write('<script src="./src/1.document.write.js"></script>');
 
 ```js
 const indexScript = document.getElementById('script_id');
-indexScript.removeAttribute('src');
 indexScript.setAttribute('src', './src/2.change_current_script_src.js');
 ```
 
@@ -70,6 +69,12 @@ const script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = './src/4.append_script.js';
 document.head.append(script);
+```
+
+### 5. ES6 import()函数（浏览器的支持还不是很好）
+
+```js
+import('./src/5.import.js');
 ```
 
 ## webpack 的动态加载
@@ -134,13 +139,24 @@ import(/* webpackChunkName: 'chunkName' */ 'path/to/js').then(
 );
 ```
 
+### 查看代码利用率
+
+目前只有 chrome 支持这个功能，查看步骤：
+
+1. 打开 Chrome Dev Tool
+2. 按下 Cmd + Shift + P(MAC) or Ctrl + Shift + P(WINDOWS)
+3. 输入 Coverage，并选择第一个出现的选项（下图）
+
+![coverage](./images/coverage.png)
+![coverage_result](./images/coverage_result.png)
+
 ## 框架中的动态加载
 
 对于使用 webpack 进行打包的框架而言，之前讲的 webpack 的方式都是适用的。其中涉及到前端路由懒加载的地方，路由源代码进行下兼容就可以了。
 
 ### Vue
 
-vue 的懒加载路由必须是这样的形式：`() => import('./MyPage.vue')`
+vue 的懒加载路由最好是这样的形式：`() => import('./MyPage.vue')`
 
 ## 参考资料
 
